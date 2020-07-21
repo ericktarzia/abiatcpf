@@ -1,0 +1,38 @@
+name: abiatcpf
+description: A new Flutter project.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+    
+  
+  cupertino_icons: ^0.1.3
+  flutter_login: ^1.0.14
+  animate_do: ^1.7.2
+  http: ^0.12.2
+  html: ^0.14.0+3
+  awesome_dialog: ^1.1.3
+  flutter_launcher_icons: "^0.7.3"
+  splashscreen: ^1.2.0
+  
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/CAC.png"
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+
+ 

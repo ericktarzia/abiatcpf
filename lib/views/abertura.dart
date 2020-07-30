@@ -24,11 +24,10 @@
 </#CR>
 */
 
+import 'package:abiatcpf/views/login/principal.view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
-
-import 'consulta.dart';
 
 class Inicio extends StatefulWidget {
   @override
@@ -52,7 +51,7 @@ class _InicioState extends State<Inicio> {
               //Color(0xff93291E)
             ],
           ),
-          navigateAfterSeconds: Consulta(),
+          navigateAfterSeconds: Principal(),
           loaderColor: Colors.transparent,
         ),
         Container(

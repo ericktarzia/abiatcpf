@@ -12,9 +12,9 @@
 * -------------------------------------------------------------------------------------------------------------------- *
 *                                           File and License Informations                                              *
 * -------------------------------------------------------------------------------------------------------------------- *
-*          File Name        > <!#FN> consulta.controller.dart </#FN>                                                   
-*          File Birth       > <!#FB> 2020/07/20 18:51:57.150 </#FB>                                                    *
-*          File Mod         > <!#FT> 2020/07/21 18:42:41.813 </#FT>                                                    *
+*          File Name        > <!#FN> shared.dart </#FN>                                                                
+*          File Birth       > <!#FB> 2020/07/29 15:35:20.618 </#FB>                                                    *
+*          File Mod         > <!#FT> 2020/07/29 15:35:33.561 </#FT>                                                    *
 *          License          > <!#LT> BSD-3-Clause-Attribution </#LT>                                                   
 *                             <!#LU> https://spdx.org/licenses/BSD-3-Clause-Attribution.html </#LU>                    
 *                             <!#LD> This file may not be redistributed in whole or significant part. </#LD>           
@@ -24,27 +24,19 @@
 </#CR>
 */
 
-import 'package:abiatcpf/repositories/protocolo.repositorie.dart';
-import 'package:html/parser.dart';
-import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ConsultaController {
-  final String url = 'http://protocolosfpc.2rm.eb.mil.br/consulta_processo.php';
+class Shared {
+  SharedPreferences prefs;
 
-  Future<String> consulta(String cpf, String protocolo) async {
-    var response = await http.post(url,
-        body: {'txt_cpf_cnpj': '$cpf', 'txt_protocolo': '$protocolo'});
-    print('Response status: ${response.statusCode}');
+  Future<void> salvarUsuario(var usuarioId) async {
+    prefs = await SharedPreferences.getInstance();
+    await prefs.setInt("usuarioId", usuarioId);
+  }
 
-    /**
-     * salvar o protocolo
-     */
-    ProtocoloRepositorie pr = new ProtocoloRepositorie();
-    pr.cadastrar(cpf, protocolo);
-    var document = parse(response.body);
-    //var res = document.getElementsByClassName('badge-pill');
-    var res = document.getElementsByClassName('container');
-
-    return (res[0].innerHtml);
+  Future<int> usuarioId() async{
+     prefs = await SharedPreferences.getInstance();
+     var usuarioId = prefs.getInt("usuarioId");
+     return usuarioId; 
   }
 }

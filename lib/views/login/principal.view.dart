@@ -12,9 +12,9 @@
 * -------------------------------------------------------------------------------------------------------------------- *
 *                                           File and License Informations                                              *
 * -------------------------------------------------------------------------------------------------------------------- *
-*          File Name        > <!#FN> consulta.controller.dart </#FN>                                                   
-*          File Birth       > <!#FB> 2020/07/20 18:51:57.150 </#FB>                                                    *
-*          File Mod         > <!#FT> 2020/07/21 18:42:41.813 </#FT>                                                    *
+*          File Name        > <!#FN> principal.view.dart </#FN>                                                        
+*          File Birth       > <!#FB> 2020/07/24 17:21:24.749 </#FB>                                                    *
+*          File Mod         > <!#FT> 2020/07/24 18:09:19.881 </#FT>                                                    *
 *          License          > <!#LT> BSD-3-Clause-Attribution </#LT>                                                   
 *                             <!#LU> https://spdx.org/licenses/BSD-3-Clause-Attribution.html </#LU>                    
 *                             <!#LD> This file may not be redistributed in whole or significant part. </#LD>           
@@ -24,27 +24,59 @@
 </#CR>
 */
 
-import 'package:abiatcpf/repositories/protocolo.repositorie.dart';
-import 'package:html/parser.dart';
-import 'package:http/http.dart' as http;
+import 'package:abiatcpf/util/shared.dart';
+import 'package:abiatcpf/views/consulta.dart';
+import 'package:abiatcpf/views/home/dashboard.view.dart';
+import 'package:abiatcpf/views/login/cadastrar.view.dart';
+import 'package:abiatcpf/views/login/login.view.dart';
+import 'package:flutter/material.dart';
 
-class ConsultaController {
-  final String url = 'http://protocolosfpc.2rm.eb.mil.br/consulta_processo.php';
+class Principal extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    testar(context);
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(200.0),
+          child: AppBar(
+            actions: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(Icons.lock),
+              )
+            ],
+            //title: Center(child: Text("C A C")),
+            backgroundColor: Colors.black,
 
-  Future<String> consulta(String cpf, String protocolo) async {
-    var response = await http.post(url,
-        body: {'txt_cpf_cnpj': '$cpf', 'txt_protocolo': '$protocolo'});
-    print('Response status: ${response.statusCode}');
+            flexibleSpace: Image.asset(
+              'assets/CAC.png',
+              height: 400,
+            ),
 
-    /**
-     * salvar o protocolo
-     */
-    ProtocoloRepositorie pr = new ProtocoloRepositorie();
-    pr.cadastrar(cpf, protocolo);
-    var document = parse(response.body);
-    //var res = document.getElementsByClassName('badge-pill');
-    var res = document.getElementsByClassName('container');
+            bottom: TabBar(
+              tabs: <Widget>[
+                Text("LOGIN"),
+                Text("CADASTRAR"),
+              ],
+            ),
+          ),
+        ),
+        body: TabBarView(
+          children: <Widget>[new Login(), new Cadastrar()],
+        ),
+      ),
+    );
+  }
 
-    return (res[0].innerHtml);
+  void testar(BuildContext context) async {
+    Shared shared = new Shared();
+    var user = await shared.usuarioId();
+    print("user $user");
+    if (await shared.usuarioId() != null) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Dashboard()));
+    }
   }
 }

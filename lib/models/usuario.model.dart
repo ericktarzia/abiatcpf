@@ -12,9 +12,9 @@
 * -------------------------------------------------------------------------------------------------------------------- *
 *                                           File and License Informations                                              *
 * -------------------------------------------------------------------------------------------------------------------- *
-*          File Name        > <!#FN> consulta.controller.dart </#FN>                                                   
-*          File Birth       > <!#FB> 2020/07/20 18:51:57.150 </#FB>                                                    *
-*          File Mod         > <!#FT> 2020/07/21 18:42:41.813 </#FT>                                                    *
+*          File Name        > <!#FN> usuario.model.dart </#FN>                                                         
+*          File Birth       > <!#FB> 2020/07/24 13:06:02.852 </#FB>                                                    *
+*          File Mod         > <!#FT> 2020/07/24 18:08:47.777 </#FT>                                                    *
 *          License          > <!#LT> BSD-3-Clause-Attribution </#LT>                                                   
 *                             <!#LU> https://spdx.org/licenses/BSD-3-Clause-Attribution.html </#LU>                    
 *                             <!#LD> This file may not be redistributed in whole or significant part. </#LD>           
@@ -24,27 +24,35 @@
 </#CR>
 */
 
-import 'package:abiatcpf/repositories/protocolo.repositorie.dart';
-import 'package:html/parser.dart';
-import 'package:http/http.dart' as http;
 
-class ConsultaController {
-  final String url = 'http://protocolosfpc.2rm.eb.mil.br/consulta_processo.php';
+class Usuario {
+  int id;
+  String nome;
+  String email;
+  String telefone;
+  String estado;
+  String senha;
 
-  Future<String> consulta(String cpf, String protocolo) async {
-    var response = await http.post(url,
-        body: {'txt_cpf_cnpj': '$cpf', 'txt_protocolo': '$protocolo'});
-    print('Response status: ${response.statusCode}');
+  Usuario(
+      {this.id, this.nome, this.email, this.telefone, this.estado, this.senha});
 
-    /**
-     * salvar o protocolo
-     */
-    ProtocoloRepositorie pr = new ProtocoloRepositorie();
-    pr.cadastrar(cpf, protocolo);
-    var document = parse(response.body);
-    //var res = document.getElementsByClassName('badge-pill');
-    var res = document.getElementsByClassName('container');
+  Usuario.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    nome = json['nome'];
+    email = json['email'];
+    telefone = json['telefone'];
+    estado = json['estado'];
+    senha = json['senha'];
+  }
 
-    return (res[0].innerHtml);
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['nome'] = this.nome;
+    data['email'] = this.email;
+    data['telefone'] = this.telefone;
+    data['estado'] = this.estado;
+    data['senha'] = this.senha;
+    return data;
   }
 }

@@ -24,13 +24,13 @@
 </#CR>
 */
 
-
 import 'package:abiatcpf/models/usuario.model.dart';
 import 'package:abiatcpf/repositories/usuario.repositorie.dart';
 
 import 'package:abiatcpf/views/home/dashboard.view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class Cadastrar extends StatelessWidget {
   @override
@@ -249,13 +249,19 @@ class _FormCadastroState extends State<FormCadastro> {
     });
 
     Usuario user = await repo.cadastrar(nome, email, estado, senha, telefone);
-    print(user.nome);
-    (user != null)
-        ? Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => Dashboard()),
-          )
-        : Get.snackbar("Algo deu Errado", "Tente mais Tarde");
+
+    if (user != null) {
+      OneSignal.shared.setExternalUserId(user.toString());
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Dashboard()),
+      );
+    } else {
+      Get.snackbar("Algo deu Errado", "Talvez este email já esteja cadastrado!",snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.amber);
+      setState(() {
+        _isButtonDisabled = false;
+      });
+    }
   }
 
   void showErro() {

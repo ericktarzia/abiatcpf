@@ -24,9 +24,11 @@
 </#CR>
 */
 
+import 'package:abiatcpf/util/notificacao.dart' as notificacao;
 import 'package:abiatcpf/views/abertura.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() {
   runApp(MyApp());
@@ -36,6 +38,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    OneSignal.shared.init('51f5afdf-0d06-4491-9932-662b78c12565');
+    OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+   // OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.none);
+   /*OneSignal.shared
+        .setNotificationReceivedHandler((OSNotification notification) {
+      notificacao.NotificacaoState().showNotification("teste");
+    });*/
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'CAC',

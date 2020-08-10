@@ -24,6 +24,7 @@
 </#CR>
 */
 
+import 'package:abiatcpf/util/notificacao.dart' as notificacao;
 import 'package:abiatcpf/views/login/principal.view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,32 +38,38 @@ class Inicio extends StatefulWidget {
 class _InicioState extends State<Inicio> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        SplashScreen(
-          seconds: 4,
-          gradientBackground: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [
-              Colors.black,
-              Colors.black
-              //Color(0xffED213A),
-              //Color(0xff93291E)
-            ],
+    // _showNotification();
+    
+   // notificacao.NotificacaoState().showNotification("sdoifusfoisoifdus");
+    return Scaffold(
+      // This trailing comma makes auto-formatting nicer for build methods. ,
+      body: Stack(
+        children: <Widget>[
+          SplashScreen(
+            seconds: 4,
+            gradientBackground: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Colors.black,
+                Colors.black
+                //Color(0xffED213A),
+                //Color(0xff93291E)
+              ],
+            ),
+            navigateAfterSeconds: Principal(),
+            loaderColor: Colors.transparent,
           ),
-          navigateAfterSeconds: Principal(),
-          loaderColor: Colors.transparent,
-        ),
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/CAC.png"),
-              fit: BoxFit.scaleDown,
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/CAC.png"),
+                fit: BoxFit.scaleDown,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

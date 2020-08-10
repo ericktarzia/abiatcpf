@@ -74,7 +74,7 @@ class _ConsultaState extends State<Consulta> {
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Text(
-              'Fornecido gratuitamente por Mário Vigianni',
+              'Este APP é fornecido gratuitamente pelo Dr. MARIO VIGGIANI NETO. Não substitui e não dispensa a consulta aos sites oficiais das SFPC\'s do Exército.',
               textAlign: TextAlign.center,
               style: new TextStyle(
                 fontSize: 10,

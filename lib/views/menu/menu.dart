@@ -1,9 +1,36 @@
+/*
+<!#CR>
+************************************************************************************************************************
+*                                                    Copyrigths ©                                                      *
+* -------------------------------------------------------------------------------------------------------------------- *
+*          Authors Names    > Erick Tarzia                                                                             *
+*          Authors Email    > ericktarzia@gmail.com                                                                    *
+*          Authors Websites > https://www.facebook.com/ericktarzia/                                                    *
+*          Authors Socials  > https://www.facebook.com/ericktarzia/                                                    *
+*          Company Email    > ericktarzia@gmail.com                                                                    *
+*          Credits          > Pahe Bleasby                                                                             *
+* -------------------------------------------------------------------------------------------------------------------- *
+*                                           File and License Informations                                              *
+* -------------------------------------------------------------------------------------------------------------------- *
+*          File Name        > <!#FN> menu.dart </#FN>                                                                  
+*          File Birth       > <!#FB> 2020/07/29 17:07:04.747 </#FB>                                                    *
+*          File Mod         > <!#FT> 2020/07/31 11:05:10.680 </#FT>                                                    *
+*          License          > <!#LT> BSD-3-Clause-Attribution </#LT>                                                   
+*                             <!#LU> https://spdx.org/licenses/BSD-3-Clause-Attribution.html </#LU>                    
+*                             <!#LD> This file may not be redistributed in whole or significant part. </#LD>           
+*          File Version     > <!#FV> 0.0.0 </#FV>                                                                      
+*                                                                                                                      *
+******************************************* VSCode Extension: Version Boss *********************************************
+</#CR>
+*/
+
+
 import 'package:abiatcpf/views/consulta.dart';
 import 'package:abiatcpf/views/historico.view.dart';
 import 'package:abiatcpf/views/home/dashboard.view.dart';
 import 'package:abiatcpf/views/home/minhaconta.view.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 import 'package:package_info/package_info.dart';
 
 class MenuLateral extends StatelessWidget {
@@ -53,13 +80,16 @@ class MenuLateral extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => MinhaConta()));
               },
             ),
+            /*
             ListTile(
               leading: Icon(Icons.help_outline),
               title: Text("SUPORTE"),
-              onTap: () {
-                Get.snackbar("EM BREVE", "Em Construção");
+              onTap: () async {
+                 
+                await FlutterOpenWhatsapp.sendSingleMessage("5511940074794", "Suporte CAC");
               },
             ),
+            */
             
             /*
             ListTile(

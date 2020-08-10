@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "755788630377",
+    "firebase_url": "https://websampa-cac.firebaseio.com",
+    "project_id": "websampa-cac",
+    "storage_bucket": "websampa-cac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755788630377:android:7280462668042c899b95f8",
+        "android_client_info": {
+          "package_name": "websampa.abiatcpf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755788630377-p94spp8a1hlih05rnjs6ags86c53fe91.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtSt0c6eUk4x1N-v91vh_rD_E8XQt353I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755788630377-p94spp8a1hlih05rnjs6ags86c53fe91.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

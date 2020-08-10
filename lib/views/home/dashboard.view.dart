@@ -1,7 +1,35 @@
+/*
+<!#CR>
+************************************************************************************************************************
+*                                                    Copyrigths ©                                                      *
+* -------------------------------------------------------------------------------------------------------------------- *
+*          Authors Names    > Erick Tarzia                                                                             *
+*          Authors Email    > ericktarzia@gmail.com                                                                    *
+*          Authors Websites > https://www.facebook.com/ericktarzia/                                                    *
+*          Authors Socials  > https://www.facebook.com/ericktarzia/                                                    *
+*          Company Email    > ericktarzia@gmail.com                                                                    *
+*          Credits          > Pahe Bleasby                                                                             *
+* -------------------------------------------------------------------------------------------------------------------- *
+*                                           File and License Informations                                              *
+* -------------------------------------------------------------------------------------------------------------------- *
+*          File Name        > <!#FN> dashboard.view.dart </#FN>                                                        
+*          File Birth       > <!#FB> 2020/07/30 11:19:14.070 </#FB>                                                    *
+*          File Mod         > <!#FT> 2020/07/31 11:01:17.270 </#FT>                                                    *
+*          License          > <!#LT> BSD-3-Clause-Attribution </#LT>                                                   
+*                             <!#LU> https://spdx.org/licenses/BSD-3-Clause-Attribution.html </#LU>                    
+*                             <!#LD> This file may not be redistributed in whole or significant part. </#LD>           
+*          File Version     > <!#FV> 0.0.0 </#FV>                                                                      
+*                                                                                                                      *
+******************************************* VSCode Extension: Version Boss *********************************************
+</#CR>
+*/
+
+
 import 'package:abiatcpf/views/historico.view.dart';
 import 'package:abiatcpf/views/home/minhaconta.view.dart';
 import 'package:abiatcpf/views/menu/menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_open_whatsapp/flutter_open_whatsapp.dart';
 import 'package:get/get.dart';
 
 import '../consulta.dart';
@@ -26,7 +54,7 @@ class Dashboard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Text(
-            'Fornecido gratuitamente por Mário Vigianni',
+            'Este APP é fornecido gratuitamente pelo Dr. MARIO VIGGIANI NETO. Não substitui e não dispensa a consulta aos sites oficiais das SFPC\'s do Exército.',
             textAlign: TextAlign.center,
             style: new TextStyle(
               fontSize: 10,
@@ -38,7 +66,7 @@ class Dashboard extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: GridView.count(
           shrinkWrap: false,
-          crossAxisCount: 2,
+          crossAxisCount: 3,
           children: <Widget>[
             InkWell(
               onTap: () {
@@ -118,9 +146,10 @@ class Dashboard extends StatelessWidget {
                 ),
               ),
             ),
+            /*
             InkWell(
-              onTap: (){
-                Get.snackbar("EM BREVE", "Em Construção");
+              onTap: () async {
+               await FlutterOpenWhatsapp.sendSingleMessage("5511940074794", "Suporte CAC");
               },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -143,7 +172,7 @@ class Dashboard extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
+            ),*/
           ],
         ),
       ),

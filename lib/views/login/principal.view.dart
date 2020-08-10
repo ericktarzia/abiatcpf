@@ -30,6 +30,7 @@ import 'package:abiatcpf/views/home/dashboard.view.dart';
 import 'package:abiatcpf/views/login/cadastrar.view.dart';
 import 'package:abiatcpf/views/login/login.view.dart';
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class Principal extends StatelessWidget {
   @override
@@ -74,6 +75,7 @@ class Principal extends StatelessWidget {
     Shared shared = new Shared();
     var user = await shared.usuarioId();
     print("user $user");
+    OneSignal.shared.setExternalUserId(user.toString());
     if (await shared.usuarioId() != null) {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Dashboard()));

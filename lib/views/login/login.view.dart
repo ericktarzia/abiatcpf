@@ -24,12 +24,12 @@
 </#CR>
 */
 
-
 import 'package:abiatcpf/models/usuario.model.dart';
 import 'package:abiatcpf/repositories/usuario.repositorie.dart';
-import 'package:abiatcpf/views/consulta.dart';
+
 import 'package:abiatcpf/views/home/dashboard.view.dart';
 import 'package:flutter/material.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -134,12 +134,15 @@ class _form_loginState extends State<form_login> {
     });
     var repo = new UsuarioRepositorie();
     Usuario user = await repo.login(email, senha);
-    (user != null)
-        ? Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => Dashboard()),
-          )
-        : showErro();
+    if (user != null) {
+      OneSignal.shared.setExternalUserId(user.toString());
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Dashboard()),
+      );
+    } else {
+      showErro();
+    }
   }
 
   void showErro() {

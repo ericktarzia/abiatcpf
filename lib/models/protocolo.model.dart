@@ -24,20 +24,27 @@
 </#CR>
 */
 
-
 class Protocolo {
   var id;
   var usuarioId;
   var cpf;
   var protocolo;
+  var rm;
 
-  Protocolo({this.id, this.usuarioId, this.cpf, this.protocolo});
+  Protocolo({
+    this.id,
+    this.usuarioId,
+    this.cpf,
+    this.protocolo,
+    this.rm,
+  });
 
   Protocolo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     usuarioId = json['usuario_id'];
     cpf = json['cpf'];
     protocolo = json['protocolo'];
+    rm = json['rm'];
   }
 
   Map<String, dynamic> toJson() {
@@ -46,6 +53,7 @@ class Protocolo {
     data['usuario_id'] = this.usuarioId;
     data['cpf'] = this.cpf;
     data['protocolo'] = this.protocolo;
+    data['rm'] = this.rm;
     return data;
   }
 }

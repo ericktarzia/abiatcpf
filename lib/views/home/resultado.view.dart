@@ -31,6 +31,7 @@ import 'package:abiatcpf/models/protocolo.model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html_view/flutter_html_view.dart';
 
+
 ConsultaController controller = new ConsultaController();
 
 class Resultado extends StatelessWidget {
@@ -72,7 +73,11 @@ class Resultado extends StatelessWidget {
                   Text(
                     "${protocolo.protocolo}",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  )
+                  ),
+                   Text(
+                    "RM ${protocolo.rm}ª",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
             ),
@@ -80,7 +85,7 @@ class Resultado extends StatelessWidget {
           Flexible(
             flex: 8,
             child: FutureBuilder(
-                future: controller.consulta(protocolo.cpf, protocolo.protocolo),
+                future: controller.consulta(protocolo),
                 builder: (ctx, snap) {
                   switch (snap.connectionState) {
                     case ConnectionState.waiting:
@@ -88,10 +93,12 @@ class Resultado extends StatelessWidget {
                       break;
                     default:
                       if (snap.data != "") {
+                        var txt = snap.data.toString();
+                        var _txt = txt.split("Checklist");
                         return Container(
                             child: new HtmlView(
-                          data: snap.data,
-
+                          data: _txt[0],
+                          
                           scrollable:
                               true, //false to use MarksownBody and true to use Marksown
                         ));

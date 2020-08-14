@@ -24,10 +24,11 @@
 </#CR>
 */
 
-import 'package:abiatcpf/controllers/consulta.controller.dart';
+
 import 'package:abiatcpf/models/protocolo.model.dart';
 import 'package:abiatcpf/views/home/resultado.view.dart';
 import 'package:abiatcpf/views/menu/menu.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,6 +43,7 @@ class _ConsultaState extends State<Consulta> {
 
   String cpf;
   String protocolo;
+  String rm;
 
   bool _isButtonDisabled;
 
@@ -100,7 +102,7 @@ class _ConsultaState extends State<Consulta> {
                 children: <Widget>[
                   Container(
                       child: Text(
-                    "CONSULTA A PROTOCOLOS DE PRODUTOS CONTROLADOS DA 2ª RM",
+                    "CONSULTA A PROTOCOLOS DE PRODUTOS CONTROLADOS DA 2ª e 11ª RM's",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   )),
@@ -148,6 +150,29 @@ class _ConsultaState extends State<Consulta> {
                         onSaved: (val) => protocolo = val,
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: new DropdownButtonFormField(
+                        decoration: const InputDecoration(
+                          labelText: "Região Militar",
+                          icon: const Icon(Icons.compare),
+                          hintText: 'Região Militar',
+                          // labelText: 'Protocolo',
+                        ),
+                        items: <String>['2', '11'].map((String value) {
+                          return new DropdownMenuItem<String>(
+                            value: value,
+                            child: new Text(value),
+                          );
+                        }).toList(),
+                        value: rm,
+                        onChanged: (val) {
+                          print(val);
+                          rm = val;
+                        },
+                        onSaved: (val) => rm = val,
+                      ),
+                    ),
                     new Container(
                       padding: const EdgeInsets.only(left: 40.0, top: 50.0),
                       child: new RaisedButton(
@@ -191,7 +216,10 @@ class _ConsultaState extends State<Consulta> {
     Protocolo protocolo = new Protocolo();
     protocolo.cpf = this.cpf;
     protocolo.protocolo = this.protocolo;
+    protocolo.rm = this.rm;
 
+    
+    
     Get.to(Resultado(
       protocolo: protocolo,
     ));

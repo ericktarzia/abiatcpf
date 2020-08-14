@@ -8,10 +8,10 @@ import '../configs.dart';
 class ProtocoloRepositorie {
   Shared shared = new Shared();
 
-  Future<void> cadastrar(var cpf, var protocolo) async {
+  Future<void> cadastrar(Protocolo protocolo) async {
     var usuarioId = await shared.usuarioId();
     var url =
-        "$urlBase/salvarProtocolo?cpf=$cpf&protocolo=$protocolo&usuario_id=$usuarioId";
+        "$urlBase/salvarProtocolo?cpf=${protocolo.cpf}&protocolo=${protocolo.protocolo}&rm=${protocolo.rm}&usuario_id=$usuarioId";
     print("url: $url");
 
     final response = await http.get(url);

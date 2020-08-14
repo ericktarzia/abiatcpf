@@ -24,27 +24,54 @@
 </#CR>
 */
 
+import 'package:abiatcpf/models/protocolo.model.dart';
 import 'package:abiatcpf/repositories/protocolo.repositorie.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
 class ConsultaController {
-  final String url = 'http://protocolosfpc.2rm.eb.mil.br/consulta_processo.php';
+  Future<String> consulta(Protocolo protocolo) async {
+    var url;
+    var response;
+    var document;
+    var res;
+    if (protocolo.rm == '2') {
+      url = 'http://protocolosfpc.2rm.eb.mil.br/consulta_processo.php';
+      response = await http.post(url, body: {
+        'txt_cpf_cnpj': '${protocolo.cpf}',
+        'txt_protocolo': '${protocolo.protocolo}'
+      });
+      document = parse(response.body);
+      //res = document.getElementsByClassName('container');
+      res = document.querySelectorAll('div');
+    }
 
-  Future<String> consulta(String cpf, String protocolo) async {
-    var response = await http.post(url,
-        body: {'txt_cpf_cnpj': '$cpf', 'txt_protocolo': '$protocolo'});
-    print('Response status: ${response.statusCode}');
+    if (protocolo.rm == '11') {
+      url =
+          //'http://www.11rm.eb.mil.br/sgp/processo.php?id=${protocolo.protocolo}&idt=${protocolo.cpf}';
+           'http://www.11rm.eb.mil.br/sgp/ReciboSgpInteressado.php?inc=1&id=${protocolo.protocolo}&idt=${protocolo.cpf}';
+      response = await http.get(url);
+      document =  parse(response.body);
+      
+      res = document.querySelectorAll('div');
+      //res = document.getBody();
+     // print("URL: $url");
+    }
+
+   
+    //print('Response status: ${response.body}');
 
     /**
      * salvar o protocolo
      */
     ProtocoloRepositorie pr = new ProtocoloRepositorie();
-    pr.cadastrar(cpf, protocolo);
-    var document = parse(response.body);
-    //var res = document.getElementsByClassName('badge-pill');
-    var res = document.getElementsByClassName('container');
+    pr.cadastrar(protocolo);
 
+    //if(protocolo.rm == '11'){
+      print("DOCUMENT" + document.toString());
+    //  return document.BodyElement();
+    
     return (res[0].innerHtml);
+    //return  response.body;
   }
 }

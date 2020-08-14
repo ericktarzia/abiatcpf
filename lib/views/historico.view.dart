@@ -109,7 +109,7 @@ class Conteudo extends StatelessWidget {
       child: Card(
         child: ListTile(
             title: Text('CPF ${protocolo.cpf}'),
-            subtitle: Text(protocolo.protocolo),
+            subtitle: Text(protocolo.protocolo + " RM: ${protocolo.rm}ª"),
             trailing: IconButton(
                 icon: Icon(Icons.keyboard_arrow_right),
                 onPressed: () => Get.to(Resultado(
@@ -119,7 +119,7 @@ class Conteudo extends StatelessWidget {
     );
   }
 
-  Future<void> resultado(var cpf, var protocolo, BuildContext context) async {
+  Future<void> resultado(Protocolo protocolo, BuildContext context) async {
     var controller = new ConsultaController();
 
     showDialog(
@@ -130,6 +130,7 @@ class Conteudo extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: SimpleDialog(
               titlePadding: EdgeInsets.all(5),
+              
               title: Column(
                 children: <Widget>[
                   Center(
@@ -139,7 +140,7 @@ class Conteudo extends StatelessWidget {
                   )),
                   Center(
                     child: Text(
-                      protocolo,
+                      protocolo.protocolo,
                       style: TextStyle(color: Colors.grey, fontSize: 18),
                     ),
                   )
@@ -148,7 +149,7 @@ class Conteudo extends StatelessWidget {
               children: <Widget>[
                 new Container(
                   child: FutureBuilder(
-                      future: controller.consulta(cpf, protocolo),
+                      future: controller.consulta(protocolo),
                       builder: (ctx, item) {
                         switch (item.connectionState) {
                           case ConnectionState.waiting:
